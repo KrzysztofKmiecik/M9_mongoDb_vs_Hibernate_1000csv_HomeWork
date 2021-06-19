@@ -44,17 +44,20 @@ public class cvsFile {
         long startSql = System.currentTimeMillis();
         sqlRepository.saveAll(personSqlDaoList);
         long stopSql = System.currentTimeMillis();
-        long sqlTime=stopSql-startSql;
+        long sqlTime = stopSql - startSql;
         System.out.println("SQL time= " + sqlTime);
 
 
         long startNoSql = System.currentTimeMillis();
         noSqlRepository.saveAll(personNoSqlDaoList);
         long stopNoSql = System.currentTimeMillis();
-        long noSqlTime=stopNoSql-startNoSql;
+        long noSqlTime = stopNoSql - startNoSql;
         System.out.println("NoSQL time= " + noSqlTime);
         double howMuchNoSqlIsFasetThenSql = sqlTime / noSqlTime * 1.0;
-        System.out.println("NoSql jest "+howMuchNoSqlIsFasetThenSql +" razy szybsza");
+        System.out.println("NoSql jest " + howMuchNoSqlIsFasetThenSql + " razy szybsza");
+
+       /* System.out.println("sqlRepository");
+        sqlRepository.findAll().forEach(System.out::println);*/
 
 
 
