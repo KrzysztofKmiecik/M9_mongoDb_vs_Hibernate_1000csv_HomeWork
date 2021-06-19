@@ -9,20 +9,21 @@ public class PersonSqlDao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "id_file")
-    private String idFile;
+    private Long idFile;
     private String first_name;
     private String last_name;
     private String email;
     private String gender;
     private String ip_address;
 
-    public PersonSqlDao(String idFile, String first_name, String last_name, String email, String gender, String ip_address) {
+    public PersonSqlDao(Long idFile, String first_name, String last_name, String email, String gender, String ip_address) {
         this.idFile = idFile;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.gender = gender;
         this.ip_address = ip_address;
+
     }
 
     public PersonSqlDao() {
@@ -36,11 +37,11 @@ public class PersonSqlDao {
         this.id = id;
     }
 
-    public String getIdFile() {
+    public Long getIdFile() {
         return idFile;
     }
 
-    public void setIdFile(String idFile) {
+    public void setIdFile(Long idFile) {
         this.idFile = idFile;
     }
 
