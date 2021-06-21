@@ -1,26 +1,17 @@
-package com.example.m9_mongodb_vs_hibernate_1000csv_homework;
+package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.StringJoiner;
 
-@Document
-public class PersonNoSqlDao {
-    @Id
-    private String id;
-    private Long idFile;
+public class Person {
+    private Long id;
     private String first_name;
     private String last_name;
     private String email;
     private String gender;
     private String ip_address;
 
-    public PersonNoSqlDao(Long idFile, String first_name, String last_name, String email, String gender, String ip_address) {
-        this.idFile = idFile;
+    public Person(Long id, String first_name, String last_name, String email, String gender, String ip_address) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -28,23 +19,15 @@ public class PersonNoSqlDao {
         this.ip_address = ip_address;
     }
 
-    public PersonNoSqlDao() {
+    public Person() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdFile() {
-        return idFile;
-    }
-
-    public void setIdFile(Long idFile) {
-        this.idFile = idFile;
     }
 
     public String getFirst_name() {
@@ -85,5 +68,17 @@ public class PersonNoSqlDao {
 
     public void setIp_address(String ip_address) {
         this.ip_address = ip_address;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Person.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("first_name='" + first_name + "'")
+                .add("last_name='" + last_name + "'")
+                .add("email='" + email + "'")
+                .add("gender='" + gender + "'")
+                .add("ip_address='" + ip_address + "'")
+                .toString();
     }
 }

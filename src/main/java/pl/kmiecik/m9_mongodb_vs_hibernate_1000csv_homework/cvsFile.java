@@ -1,5 +1,6 @@
-package com.example.m9_mongodb_vs_hibernate_1000csv_homework;
+package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework;
 
+import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -25,13 +26,25 @@ public class cvsFile {
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void readCsv() throws FileNotFoundException {
+    public void Start() throws FileNotFoundException {
 
+        List<Person> persons = readPersonsFromCsvFile();
+
+        savePersonsToDb(persons);
+
+
+    }
+
+    private List<Person> readPersonsFromCsvFile() throws FileNotFoundException {
         List<Person> persons = new CsvToBeanBuilder(new FileReader("src/main/resources/static/MOCK_DATA.csv"))
                 .withType(Person.class).build().parse();
 
         persons.forEach(System.out::println);
+        return persons;
+    }
 
+    @CuntDurationTime
+    private void savePersonsToDb(List<Person> persons) {
         List<PersonSqlDao> personSqlDaoList = new ArrayList<>();
         List<PersonNoSqlDao> personNoSqlDaoList = new ArrayList<>();
 
@@ -58,8 +71,5 @@ public class cvsFile {
 
        /* System.out.println("sqlRepository");
         sqlRepository.findAll().forEach(System.out::println);*/
-
-
-
     }
 }
