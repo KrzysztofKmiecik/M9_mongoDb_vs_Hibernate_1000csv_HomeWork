@@ -1,18 +1,19 @@
 package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework;
 
-import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileReader;
 
 @Component
+
 public class cvsFile {
 
 
@@ -29,47 +30,40 @@ public class cvsFile {
     public void Start() throws FileNotFoundException {
 
         List<Person> persons = readPersonsFromCsvFile();
-
-        savePersonsToDb(persons);
-
-
+        sayHello();
+        savePersonsToSqlDb(persons);
+        //  savePersonsToNoSqlDb(persons);
     }
+
+    @CuntDurationTime
+    public void sayHello() {
+        System.out.println("Hello");
+    }
+
 
     private List<Person> readPersonsFromCsvFile() throws FileNotFoundException {
         List<Person> persons = new CsvToBeanBuilder(new FileReader("src/main/resources/static/MOCK_DATA.csv"))
                 .withType(Person.class).build().parse();
-
-        persons.forEach(System.out::println);
+        // persons.forEach(System.out::println);
         return persons;
     }
 
-    @CuntDurationTime
-    private void savePersonsToDb(List<Person> persons) {
+
+    private String savePersonsToSqlDb(List<Person> persons) {
         List<PersonSqlDao> personSqlDaoList = new ArrayList<>();
-        List<PersonNoSqlDao> personNoSqlDaoList = new ArrayList<>();
-
-
         for (Person person : persons) {
             personSqlDaoList.add(new PersonSqlDao(person.getId(), person.getFirst_name(), person.getLast_name(), person.getEmail(), person.getGender(), person.getIp_address()));
+        }
+        sqlRepository.saveAll(personSqlDaoList);
+        return "";
+    }
+   /* @CuntDurationTime
+    private void savePersonsToNoSqlDb(List<Person> persons) {
+        List<PersonNoSqlDao> personNoSqlDaoList = new ArrayList<>();
+        for (Person person : persons) {
             personNoSqlDaoList.add(new PersonNoSqlDao(person.getId(), person.getFirst_name(), person.getLast_name(), person.getEmail(), person.getGender(), person.getIp_address()));
         }
-
-        long startSql = System.currentTimeMillis();
-        sqlRepository.saveAll(personSqlDaoList);
-        long stopSql = System.currentTimeMillis();
-        long sqlTime = stopSql - startSql;
-        System.out.println("SQL time= " + sqlTime);
-
-
-        long startNoSql = System.currentTimeMillis();
         noSqlRepository.saveAll(personNoSqlDaoList);
-        long stopNoSql = System.currentTimeMillis();
-        long noSqlTime = stopNoSql - startNoSql;
-        System.out.println("NoSQL time= " + noSqlTime);
-        double howMuchNoSqlIsFasetThenSql = sqlTime / noSqlTime * 1.0;
-        System.out.println("NoSql jest " + howMuchNoSqlIsFasetThenSql + " razy szybsza");
 
-       /* System.out.println("sqlRepository");
-        sqlRepository.findAll().forEach(System.out::println);*/
-    }
+    }*/
 }
