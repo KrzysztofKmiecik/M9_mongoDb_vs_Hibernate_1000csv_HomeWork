@@ -1,26 +1,14 @@
-package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain;
+package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure;
 
-import java.util.StringJoiner;
+import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
 
-public class Person {
+public class PersonDto extends Person {
     private Long idFile;
     private String first_name;
     private String last_name;
     private String email;
     private String gender;
     private String ip_address;
-
-    public Person(Long idFile, String first_name, String last_name, String email, String gender, String ip_address) {
-        this.idFile = idFile;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.gender = gender;
-        this.ip_address = ip_address;
-    }
-
-    public Person() {
-    }
 
     public Long getIdFile() {
         return idFile;
@@ -68,17 +56,5 @@ public class Person {
 
     public void setIp_address(String ip_address) {
         this.ip_address = ip_address;
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Person.class.getSimpleName() + "[", "]")
-                .add("id=" + idFile)
-                .add("first_name='" + first_name + "'")
-                .add("last_name='" + last_name + "'")
-                .add("email='" + email + "'")
-                .add("gender='" + gender + "'")
-                .add("ip_address='" + ip_address + "'")
-                .toString();
     }
 }

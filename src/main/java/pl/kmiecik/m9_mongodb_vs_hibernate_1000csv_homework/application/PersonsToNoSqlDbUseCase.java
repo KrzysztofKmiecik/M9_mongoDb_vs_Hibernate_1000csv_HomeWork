@@ -15,6 +15,7 @@ import java.util.List;
 class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
 
     private final PersonNoSqlRepository personNoSqlRepository;
+    // private  final PersonMapper personMapper;
 
     @Autowired
     public PersonsToNoSqlDbUseCase(PersonNoSqlRepository personNoSqlRepository) {
@@ -22,7 +23,7 @@ class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
     }
 
     @Override
-    public void deleteAllPersons(){
+    public void deleteAllPersons() {
         personNoSqlRepository.deleteAll();
     }
 
@@ -44,7 +45,7 @@ class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
         List<PersonNoSqlDao> personNoSqlDaoList = new ArrayList<>();
         for (Person person : persons) {
             personNoSqlDaoList.add(new PersonNoSqlDao(
-                    person.getId(),
+                    person.getIdFile(),
                     person.getFirst_name(),
                     person.getLast_name(),
                     person.getEmail(),

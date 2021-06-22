@@ -22,7 +22,7 @@ class PersonsToSqlDbUseCase implements PersonsToSqlService {
     }
 
     @Override
-    public void deleteAllPersons(){
+    public void deleteAllPersons() {
         personSqlRepository.deleteAll();
     }
 
@@ -44,7 +44,7 @@ class PersonsToSqlDbUseCase implements PersonsToSqlService {
         List<PersonSqlDao> personSqlDaoList = new ArrayList<>();
         for (Person person : persons) {
             personSqlDaoList.add(new PersonSqlDao(
-                    person.getId(),
+                    person.getIdFile(),
                     person.getFirst_name(),
                     person.getLast_name(),
                     person.getEmail(),
