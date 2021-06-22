@@ -31,9 +31,7 @@ public class Init {
     public void Start() throws FileNotFoundException {
 
         List<Person> persons = csvFileService.readPersonsFromCsvFile();
-
         personsToSqlService.savePersonsToSqlDb(persons);
         personsToNoSqlService.savePersonsToNoSqlDb(persons);
     }
-
 }

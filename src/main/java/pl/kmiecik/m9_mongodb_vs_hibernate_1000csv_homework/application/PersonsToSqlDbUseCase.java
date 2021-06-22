@@ -23,12 +23,11 @@ public class PersonsToSqlDbUseCase implements PersonsToSqlService {
 
     @Override
     @CuntDurationTime
-    public String savePersonsToSqlDb(List<Person> persons) {
+    public void savePersonsToSqlDb(List<Person> persons) {
         List<PersonSqlDao> personSqlDaoList = new ArrayList<>();
         for (Person person : persons) {
             personSqlDaoList.add(new PersonSqlDao(person.getId(), person.getFirst_name(), person.getLast_name(), person.getEmail(), person.getGender(), person.getIp_address()));
         }
         personSqlRepository.saveAll(personSqlDaoList);
-        return "";
     }
 }
