@@ -1,4 +1,4 @@
-package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework;
+package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework;
+package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,13 +16,13 @@ public class TimeMeasurementAspect {
     }
 
 
-    @Before("@annotation(pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.CuntDurationTime)")
+    @Before("@annotation(pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.CuntDurationTime)")
     private void startCounter() {
         startTime = System.currentTimeMillis();
         System.out.println("Start dfdfsd");
     }
 
-    @After("@annotation(pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.CuntDurationTime)")
+    @After("@annotation(pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.CuntDurationTime)")
     private void stopCounter() {
         stopTime = System.currentTimeMillis();
         showDurationTime();

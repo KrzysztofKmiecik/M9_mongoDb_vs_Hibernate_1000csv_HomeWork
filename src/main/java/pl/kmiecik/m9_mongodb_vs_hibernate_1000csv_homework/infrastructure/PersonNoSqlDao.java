@@ -1,12 +1,8 @@
-package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework;
+package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.StringJoiner;
 
 @Document
 public class PersonNoSqlDao {
