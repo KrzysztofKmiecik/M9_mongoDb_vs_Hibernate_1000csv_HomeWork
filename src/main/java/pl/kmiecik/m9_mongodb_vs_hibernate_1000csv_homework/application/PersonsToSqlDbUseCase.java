@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application.port.PersonsToSqlService;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.CuntDurationTime;
-import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonDto;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonMapper;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonSqlDao;

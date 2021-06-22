@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "person")
-public class PersonSqlDao {
+public class PersonSqlDao  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

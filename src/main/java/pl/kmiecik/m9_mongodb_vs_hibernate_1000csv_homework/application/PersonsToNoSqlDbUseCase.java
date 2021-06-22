@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application.port.PersonsToNoSqlService;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.CuntDurationTime;
-import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonDto;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonMapper;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonNoSqlDao;
@@ -32,8 +31,8 @@ class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
 
     @Override
     @CuntDurationTime
-    public void savePersonsToNoSqlDb(final List<PersonDto> persons) {
-        List<PersonNoSqlDao> personNoSqlDaoList = mapperToDao(persons);
+    public void savePersonsToNoSqlDb(final List<PersonDto> personsDto) {
+        List<PersonNoSqlDao> personNoSqlDaoList = mapperToDao(personsDto);
         personNoSqlRepository.saveAll(personNoSqlDaoList);
     }
 
