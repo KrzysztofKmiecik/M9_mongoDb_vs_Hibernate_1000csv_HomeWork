@@ -33,5 +33,8 @@ public class Init {
         List<Person> persons = csvFileService.readPersonsFromCsvFile();
         personsToSqlService.savePersonsToSqlDb(persons);
         personsToNoSqlService.savePersonsToNoSqlDb(persons);
+
+      personsToSqlService.readPersonsFromSqlDb();
+      personsToNoSqlService.readPersonsFromNoSqlDb();
     }
 }

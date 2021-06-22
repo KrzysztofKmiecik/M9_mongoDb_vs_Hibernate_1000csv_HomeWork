@@ -24,10 +24,42 @@ public class PersonsToSqlDbUseCase implements PersonsToSqlService {
     @Override
     @CuntDurationTime
     public void savePersonsToSqlDb(List<Person> persons) {
+        List<PersonSqlDao> personSqlDaoList = mapperToDao(persons);
+        personSqlRepository.saveAll(personSqlDaoList);
+    }
+
+    @Override
+    @CuntDurationTime
+    public List<Person> readPersonsFromSqlDb() {
+        List<PersonSqlDao> dataFromDb = personSqlRepository.findAll();
+        return mapperFromDao(dataFromDb);
+    }
+
+    private List<PersonSqlDao> mapperToDao(List<Person> persons) {
         List<PersonSqlDao> personSqlDaoList = new ArrayList<>();
         for (Person person : persons) {
-            personSqlDaoList.add(new PersonSqlDao(person.getId(), person.getFirst_name(), person.getLast_name(), person.getEmail(), person.getGender(), person.getIp_address()));
+            personSqlDaoList.add(new PersonSqlDao(
+                    person.getId(),
+                    person.getFirst_name(),
+                    person.getLast_name(),
+                    person.getEmail(),
+                    person.getGender(),
+                    person.getIp_address()));
         }
-        personSqlRepository.saveAll(personSqlDaoList);
+        return personSqlDaoList;
+    }
+
+    private List<Person> mapperFromDao(List<PersonSqlDao> personsSqlDao) {
+        List<Person> personList = new ArrayList<>();
+        for (PersonSqlDao personSqlDao : personsSqlDao) {
+            personList.add(new Person(
+                    personSqlDao.getIdFile(),
+                    personSqlDao.getFirst_name(),
+                    personSqlDao.getLast_name(),
+                    personSqlDao.getEmail(),
+                    personSqlDao.getGender(),
+                    personSqlDao.getIp_address()));
+        }
+        return personList;
     }
 }

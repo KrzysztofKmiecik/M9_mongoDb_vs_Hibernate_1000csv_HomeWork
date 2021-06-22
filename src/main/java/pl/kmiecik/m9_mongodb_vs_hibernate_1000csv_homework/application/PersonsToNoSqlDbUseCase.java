@@ -24,10 +24,43 @@ public class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
     @Override
     @CuntDurationTime
     public void savePersonsToNoSqlDb(List<Person> persons) {
-        List<PersonNoSqlDao> personNoSqlDaoList = new ArrayList<>();
-        for (Person person : persons) {
-            personNoSqlDaoList.add(new PersonNoSqlDao(person.getId(), person.getFirst_name(), person.getLast_name(), person.getEmail(), person.getGender(), person.getIp_address()));
-        }
+        List<PersonNoSqlDao> personNoSqlDaoList = mapperToDao(persons);
         personNoSqlRepository.saveAll(personNoSqlDaoList);
     }
+
+    @Override
+    @CuntDurationTime
+    public List<Person> readPersonsFromNoSqlDb() {
+        List<PersonNoSqlDao> dataFromDb = personNoSqlRepository.findAll();
+        return mapperFromDao(dataFromDb);
+    }
+
+    private List<PersonNoSqlDao> mapperToDao(List<Person> persons) {
+        List<PersonNoSqlDao> personNoSqlDaoList = new ArrayList<>();
+        for (Person person : persons) {
+            personNoSqlDaoList.add(new PersonNoSqlDao(
+                    person.getId(),
+                    person.getFirst_name(),
+                    person.getLast_name(),
+                    person.getEmail(),
+                    person.getGender(),
+                    person.getIp_address()));
+        }
+        return personNoSqlDaoList;
+    }
+
+    private List<Person> mapperFromDao(List<PersonNoSqlDao> personsNoSqlDao) {
+        List<Person> personList = new ArrayList<>();
+        for (PersonNoSqlDao personNoSqlDao : personsNoSqlDao) {
+            personList.add(new Person(
+                    personNoSqlDao.getIdFile(),
+                    personNoSqlDao.getFirst_name(),
+                    personNoSqlDao.getLast_name(),
+                    personNoSqlDao.getEmail(),
+                    personNoSqlDao.getGender(),
+                    personNoSqlDao.getIp_address()));
+        }
+        return personList;
+    }
+
 }
