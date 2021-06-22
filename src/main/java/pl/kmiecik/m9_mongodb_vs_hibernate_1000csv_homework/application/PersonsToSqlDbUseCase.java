@@ -22,6 +22,11 @@ class PersonsToSqlDbUseCase implements PersonsToSqlService {
     }
 
     @Override
+    public void deleteAllPersons(){
+        personSqlRepository.deleteAll();
+    }
+
+    @Override
     @CuntDurationTime
     public void savePersonsToSqlDb(final List<Person> persons) {
         List<PersonSqlDao> personSqlDaoList = mapperToDao(persons);

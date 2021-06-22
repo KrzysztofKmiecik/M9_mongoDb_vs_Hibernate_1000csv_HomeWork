@@ -22,6 +22,11 @@ class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
     }
 
     @Override
+    public void deleteAllPersons(){
+        personNoSqlRepository.deleteAll();
+    }
+
+    @Override
     @CuntDurationTime
     public void savePersonsToNoSqlDb(final List<Person> persons) {
         List<PersonNoSqlDao> personNoSqlDaoList = mapperToDao(persons);

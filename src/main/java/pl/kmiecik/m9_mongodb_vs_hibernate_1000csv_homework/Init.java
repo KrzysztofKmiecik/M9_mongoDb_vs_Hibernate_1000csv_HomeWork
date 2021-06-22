@@ -29,12 +29,14 @@ class Init {
 
     @EventListener(ApplicationReadyEvent.class)
     public void Start() throws FileNotFoundException {
+        personsToSqlService.deleteAllPersons();
+        personsToNoSqlService.deleteAllPersons();
 
         List<Person> persons = csvFileService.readPersonsFromCsvFile();
         personsToSqlService.savePersonsToSqlDb(persons);
-        personsToNoSqlService.savePersonsToNoSqlDb(persons);
-
         personsToSqlService.readPersonsFromSqlDb();
+
+        personsToNoSqlService.savePersonsToNoSqlDb(persons);
         personsToNoSqlService.readPersonsFromNoSqlDb();
     }
 }

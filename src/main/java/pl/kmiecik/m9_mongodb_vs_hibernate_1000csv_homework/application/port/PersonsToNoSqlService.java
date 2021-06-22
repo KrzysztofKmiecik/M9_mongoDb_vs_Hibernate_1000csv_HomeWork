@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface PersonsToNoSqlService {
 
+    void deleteAllPersons();
+
     void savePersonsToNoSqlDb(List<Person> persons);
 
     @CuntDurationTime
