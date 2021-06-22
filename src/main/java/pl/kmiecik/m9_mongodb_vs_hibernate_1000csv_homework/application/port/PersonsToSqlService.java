@@ -1,13 +1,13 @@
 package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application.port;
 
-import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
+import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonDto;
 
 import java.util.List;
 
 public interface PersonsToSqlService {
     void deleteAllPersons();
 
-    void savePersonsToSqlDb(List<Person> persons);
+    void savePersonsToSqlDb(List<PersonDto> persons);
 
-    List<Person> readPersonsFromSqlDb();
+    List<PersonDto> readPersonsFromSqlDb();
 }

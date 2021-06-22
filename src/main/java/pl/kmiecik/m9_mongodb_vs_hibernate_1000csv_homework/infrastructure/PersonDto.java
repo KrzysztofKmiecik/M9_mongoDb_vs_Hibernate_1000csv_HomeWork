@@ -1,13 +1,27 @@
 package pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure;
 
+
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+
 public class PersonDto extends Person {
+    @NotNull
+    @Min(0)
     private Long idFile;
+    @NotBlank
     private String first_name;
+    @NotBlank
     private String last_name;
+    @Email
     private String email;
+    @NotBlank
     private String gender;
+    @NotBlank
     private String ip_address;
 
     public Long getIdFile() {

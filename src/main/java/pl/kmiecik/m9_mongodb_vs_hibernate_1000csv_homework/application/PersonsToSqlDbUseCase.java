@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application.port.PersonsToSqlService;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.CuntDurationTime;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
+import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonDto;
+import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonMapper;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonSqlDao;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonSqlRepository;
 
@@ -15,10 +17,12 @@ import java.util.List;
 class PersonsToSqlDbUseCase implements PersonsToSqlService {
 
     private final PersonSqlRepository personSqlRepository;
+    private final PersonMapper personMapper;
 
     @Autowired
-    public PersonsToSqlDbUseCase(PersonSqlRepository personSqlRepository) {
+    public PersonsToSqlDbUseCase(PersonSqlRepository personSqlRepository, PersonMapper personMapper) {
         this.personSqlRepository = personSqlRepository;
+        this.personMapper = personMapper;
     }
 
     @Override
@@ -28,42 +32,30 @@ class PersonsToSqlDbUseCase implements PersonsToSqlService {
 
     @Override
     @CuntDurationTime
-    public void savePersonsToSqlDb(final List<Person> persons) {
-        List<PersonSqlDao> personSqlDaoList = mapperToDao(persons);
+    public void savePersonsToSqlDb(final List<PersonDto> personsDto) {
+        List<PersonSqlDao> personSqlDaoList = mapperToDao(personsDto);
         personSqlRepository.saveAll(personSqlDaoList);
     }
 
     @Override
     @CuntDurationTime
-    public List<Person> readPersonsFromSqlDb() {
+    public List<PersonDto> readPersonsFromSqlDb() {
         List<PersonSqlDao> dataFromDb = personSqlRepository.findAll();
         return mapperFromDao(dataFromDb);
     }
 
-    private List<PersonSqlDao> mapperToDao(final List<Person> persons) {
+    private List<PersonSqlDao> mapperToDao(final List<PersonDto> personsDto) {
         List<PersonSqlDao> personSqlDaoList = new ArrayList<>();
-        for (Person person : persons) {
-            personSqlDaoList.add(new PersonSqlDao(
-                    person.getIdFile(),
-                    person.getFirst_name(),
-                    person.getLast_name(),
-                    person.getEmail(),
-                    person.getGender(),
-                    person.getIp_address()));
+        for (PersonDto personDto : personsDto) {
+            personSqlDaoList.add(personMapper.mapToPersonSqlDao(personDto));
         }
         return personSqlDaoList;
     }
 
-    private List<Person> mapperFromDao(final List<PersonSqlDao> personsSqlDao) {
-        List<Person> personList = new ArrayList<>();
+    private List<PersonDto> mapperFromDao(final List<PersonSqlDao> personsSqlDao) {
+        List<PersonDto> personList = new ArrayList<>();
         for (PersonSqlDao personSqlDao : personsSqlDao) {
-            personList.add(new Person(
-                    personSqlDao.getIdFile(),
-                    personSqlDao.getFirst_name(),
-                    personSqlDao.getLast_name(),
-                    personSqlDao.getEmail(),
-                    personSqlDao.getGender(),
-                    personSqlDao.getIp_address()));
+            personList.add(personMapper.mapToPersonDto(personSqlDao));
         }
         return personList;
     }

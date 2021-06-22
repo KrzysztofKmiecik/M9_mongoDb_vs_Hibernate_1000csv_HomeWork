@@ -8,6 +8,7 @@ import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application.port.CSVF
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application.port.PersonsToNoSqlService;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.application.port.PersonsToSqlService;
 import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.domain.Person;
+import pl.kmiecik.m9_mongodb_vs_hibernate_1000csv_homework.infrastructure.PersonDto;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -32,11 +33,11 @@ class Init {
         personsToSqlService.deleteAllPersons();
         personsToNoSqlService.deleteAllPersons();
 
-        List<Person> persons = csvFileService.readPersonsFromCsvFile();
-        personsToSqlService.savePersonsToSqlDb(persons);
+        List<PersonDto> personsDto = csvFileService.readPersonsFromCsvFile();
+        personsToSqlService.savePersonsToSqlDb(personsDto);
         personsToSqlService.readPersonsFromSqlDb();
 
-        personsToNoSqlService.savePersonsToNoSqlDb(persons);
+        personsToNoSqlService.savePersonsToNoSqlDb(personsDto);
         personsToNoSqlService.readPersonsFromNoSqlDb();
     }
 }
