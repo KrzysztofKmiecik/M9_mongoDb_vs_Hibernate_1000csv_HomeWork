@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
+class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
 
     private final PersonNoSqlRepository personNoSqlRepository;
 
@@ -23,7 +23,7 @@ public class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
 
     @Override
     @CuntDurationTime
-    public void savePersonsToNoSqlDb(List<Person> persons) {
+    public void savePersonsToNoSqlDb(final List<Person> persons) {
         List<PersonNoSqlDao> personNoSqlDaoList = mapperToDao(persons);
         personNoSqlRepository.saveAll(personNoSqlDaoList);
     }
@@ -35,7 +35,7 @@ public class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
         return mapperFromDao(dataFromDb);
     }
 
-    private List<PersonNoSqlDao> mapperToDao(List<Person> persons) {
+    private List<PersonNoSqlDao> mapperToDao(final List<Person> persons) {
         List<PersonNoSqlDao> personNoSqlDaoList = new ArrayList<>();
         for (Person person : persons) {
             personNoSqlDaoList.add(new PersonNoSqlDao(
@@ -49,7 +49,7 @@ public class PersonsToNoSqlDbUseCase implements PersonsToNoSqlService {
         return personNoSqlDaoList;
     }
 
-    private List<Person> mapperFromDao(List<PersonNoSqlDao> personsNoSqlDao) {
+    private List<Person> mapperFromDao(final List<PersonNoSqlDao> personsNoSqlDao) {
         List<Person> personList = new ArrayList<>();
         for (PersonNoSqlDao personNoSqlDao : personsNoSqlDao) {
             personList.add(new Person(

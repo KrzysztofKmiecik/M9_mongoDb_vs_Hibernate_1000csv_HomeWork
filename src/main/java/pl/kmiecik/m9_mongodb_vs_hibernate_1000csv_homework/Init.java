@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 @Component
-public class Init {
+class Init {
 
 
     private final CSVFileService csvFileService;
@@ -34,7 +34,7 @@ public class Init {
         personsToSqlService.savePersonsToSqlDb(persons);
         personsToNoSqlService.savePersonsToNoSqlDb(persons);
 
-      personsToSqlService.readPersonsFromSqlDb();
-      personsToNoSqlService.readPersonsFromNoSqlDb();
+        personsToSqlService.readPersonsFromSqlDb();
+        personsToNoSqlService.readPersonsFromNoSqlDb();
     }
 }

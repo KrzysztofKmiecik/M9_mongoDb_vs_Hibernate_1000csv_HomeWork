@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PersonsToSqlDbUseCase implements PersonsToSqlService {
+class PersonsToSqlDbUseCase implements PersonsToSqlService {
 
     private final PersonSqlRepository personSqlRepository;
 
@@ -23,7 +23,7 @@ public class PersonsToSqlDbUseCase implements PersonsToSqlService {
 
     @Override
     @CuntDurationTime
-    public void savePersonsToSqlDb(List<Person> persons) {
+    public void savePersonsToSqlDb(final List<Person> persons) {
         List<PersonSqlDao> personSqlDaoList = mapperToDao(persons);
         personSqlRepository.saveAll(personSqlDaoList);
     }
@@ -35,7 +35,7 @@ public class PersonsToSqlDbUseCase implements PersonsToSqlService {
         return mapperFromDao(dataFromDb);
     }
 
-    private List<PersonSqlDao> mapperToDao(List<Person> persons) {
+    private List<PersonSqlDao> mapperToDao(final List<Person> persons) {
         List<PersonSqlDao> personSqlDaoList = new ArrayList<>();
         for (Person person : persons) {
             personSqlDaoList.add(new PersonSqlDao(
@@ -49,7 +49,7 @@ public class PersonsToSqlDbUseCase implements PersonsToSqlService {
         return personSqlDaoList;
     }
 
-    private List<Person> mapperFromDao(List<PersonSqlDao> personsSqlDao) {
+    private List<Person> mapperFromDao(final List<PersonSqlDao> personsSqlDao) {
         List<Person> personList = new ArrayList<>();
         for (PersonSqlDao personSqlDao : personsSqlDao) {
             personList.add(new Person(
